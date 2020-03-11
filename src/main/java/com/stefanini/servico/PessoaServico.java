@@ -47,6 +47,7 @@ public class PessoaServico implements Serializable {
 	 * Atualizar o dados de uma pessoa
 	 */
 //	@Override
+	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public Pessoa atualizar(@Valid Pessoa entity) {
 		return dao.atualizar(entity);
 	}
@@ -55,6 +56,7 @@ public class PessoaServico implements Serializable {
 	 * Remover uma pessoa pelo id
 	 */
 //	@Override
+	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public void remover(@Valid Long id) {
 		dao.remover(id);
 	}
@@ -63,6 +65,7 @@ public class PessoaServico implements Serializable {
 	 * Buscar uma lista de Pessoa
 	 */
 //	@Override
+	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public Optional<List<Pessoa>> getList() {
 		return dao.getList();
 	}
@@ -71,6 +74,7 @@ public class PessoaServico implements Serializable {
 	 * Buscar uma Pessoa pelo ID
 	 */
 //	@Override
+	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public Optional<Pessoa> encontrar(Long id) {
 		return dao.encontrar(id);
 	}
