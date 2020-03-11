@@ -20,7 +20,6 @@ public class EnderecoServico implements IGenericService<Endereco, Long> {
 	@Inject
 	private EnderecoDao dao;
 
-
 	@Override
 	public Endereco salvar(@Valid Endereco entity) {
 		return dao.salvar(entity);
@@ -33,12 +32,12 @@ public class EnderecoServico implements IGenericService<Endereco, Long> {
 
 	@Override
 	public void remover(Long id) {
-	dao.remover(id);
+		dao.remover(id);
 	}
 
 	@Override
 	public Optional<List<Endereco>> getList() {
-		return Optional.empty();
+		return dao.getList();
 	}
 
 	@Override

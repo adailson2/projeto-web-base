@@ -21,8 +21,6 @@ import java.util.Optional;
  */
 public abstract class GenericDao<T, I extends Serializable> implements IGenericService<T, I>{
 
-
-
 	@PersistenceContext(unitName="jpa")
 	protected EntityManager entityManager;
 

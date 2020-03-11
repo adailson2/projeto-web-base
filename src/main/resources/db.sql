@@ -38,8 +38,6 @@ CREATE TABLE public.TB_PESSOA (
                 CONSTRAINT co_seq_pessoa PRIMARY KEY (CO_SEQ_PESSOA)
 );
 
-
-
 CREATE INDEX in_tb_pessoa_no_nome
  ON public.TB_PESSOA
  ( NO_NOME ASC );
@@ -56,8 +54,6 @@ CREATE TABLE public.TB_PESSOA_PERFIL (
                 CO_SEQ_PERFIL INTEGER NOT NULL,
                 CONSTRAINT co_seq_pessoa_perfil PRIMARY KEY (CO_SEQ_PESSOAL_PERFIL)
 );
-
-
 
 ALTER TABLE public.TB_PESSOA_PERFIL ADD CONSTRAINT fk_tb_perfil_tb_usuario_perfi_fk
 FOREIGN KEY (CO_SEQ_PERFIL)

@@ -1,13 +1,13 @@
 package com.stefanini.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.time.LocalDate;
 
 @Entity
-@Table(name = "tb_endereco")
+@Table(name = "TB_ENDERECO")
 public class Endereco implements Serializable {
-
-
 
     /**
      * Serializacao da Classe
@@ -38,6 +38,7 @@ public class Endereco implements Serializable {
 
     @Column(name = "DS_LOGRADOURO")
     private String logradouro;
+
     /**
      * Unidirecional
      * Somente Pessoa acessa endereco
@@ -45,12 +46,28 @@ public class Endereco implements Serializable {
     @Column(name = "CO_SEQ_PESSOA")
     private Long idPessoa;
 
-//    @ManyToOne
-//    @JoinColumn(name = "co_seq_pessoa", referencedColumnName = "co_seq_pessoa", nullable = false)
-//    private Pessoa pessoa;
-
-
     public Endereco() {
+    }
+
+    /**
+     * Construtor da Classe, Obrigando receber todos os parametros
+     * @param cep
+     * @param uf
+     * @param localidade
+     * @param bairro
+     * @param complemento
+     * @param logradouro
+     * @param idPessoa
+     */
+    public Endereco(@NotNull String cep, @NotNull String uf, @NotNull String localidade, @NotNull String bairro, @NotNull String complemento, @NotNull String logradouro, @NotNull Long idPessoa) {
+        super();
+        this.cep = cep;
+        this.uf = uf;
+        this.localidade = localidade;
+        this.bairro = bairro;
+        this.complemento = complemento;
+        this.logradouro = logradouro;
+        this.idPessoa = idPessoa;
     }
 
     public Long getId() {

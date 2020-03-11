@@ -95,12 +95,12 @@ public class Pessoa implements Serializable{
 			inverseJoinColumns = {@JoinColumn(name = "CO_SEQ_PERFIL")}
 	)
 	private Set<Perfil> perfils;
+
 	/**
 	 * Metodo construtor da classe
 	 */
 	public Pessoa() {
 	}
-
 
 	public Set<Perfil> getPerfils() {
 		return perfils;
@@ -125,7 +125,6 @@ public class Pessoa implements Serializable{
 		this.situacao = situacao;
 	}
 
-
 	public Set<Endereco> getEnderecos() {
 		return enderecos;
 	}
@@ -133,7 +132,6 @@ public class Pessoa implements Serializable{
 	public void setEnderecos(Set<Endereco> enderecos) {
 		this.enderecos = enderecos;
 	}
-
 
 	public Long getId() {
 		return id;
@@ -158,8 +156,6 @@ public class Pessoa implements Serializable{
 	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
-
-	
 
 	public String getEmail() {
 		return email;
@@ -207,13 +203,5 @@ public class Pessoa implements Serializable{
 		return "Pessoa [id=" + id + ", nome=" + nome + ", email=" + email + ", dataNascimento=" + dataNascimento
 				+ ", situacao=" + situacao + "]";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 
 }
