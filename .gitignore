@@ -1,0 +1,8 @@
+/target/
+.idea/
+bin/
+.settings/
+.classpath
+.project
+jpaexample.iml
+pom.xml
