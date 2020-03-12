@@ -1,9 +1,16 @@
 package com.stefanini.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Set;
+
+import static com.fasterxml.jackson.annotation.JsonFormat.Shape.STRING;
 
 @Entity
 @Table(name = "TB_PERFIL")
@@ -32,38 +39,40 @@ public class Perfil implements Serializable {
      */
     @Column(name = "dt_hora_inclusao")
     @NotNull
+    @JsonFormat(shape = STRING, pattern = "yyyy-MM-dd HH:mm:ss.SS")
     private LocalDateTime dataHoraInclusao;
     /**
      *
      */
     @Column(name = "dt_hora_alteracao")
+    @JsonFormat (shape = STRING, pattern = "yyyy-MM-dd HH:mm:ss.SS")
     private LocalDateTime dataHoraAlteracao;
 
-//    /**
-//     * Mapeamento de Pessoa
-//     */
-//    @ManyToMany(mappedBy = "perfils")
-//    private Set<Pessoa> pessoas;
-
+    /**
+     * Mapeamento de Pessoa
+     */
+    @JsonIgnore
+    @ManyToMany(mappedBy = "perfils")
+    private Set<Pessoa> pessoas;
 
     public Perfil() {
     }
 
-    public Perfil(@NotNull String nome, @NotNull String descricao, @NotNull LocalDateTime dataHoraInclusao, LocalDateTime dataHoraAlteracao) {
+    public Perfil(@NotNull String nome, @NotNull String descricao, @NotNull LocalDateTime dataHoraInclusao, LocalDateTime dataHoraAlteracao, Set<Pessoa> pessoas) {
         this.nome = nome;
         this.descricao = descricao;
         this.dataHoraInclusao = dataHoraInclusao;
         this.dataHoraAlteracao = dataHoraAlteracao;
-//        this.pessoas = pessoas;
+        this.pessoas = pessoas;
     }
 
-//    public Set<Pessoa> getPessoas() {
-//        return pessoas;
-//    }
-//
-//    public void setPessoas(Set<Pessoa> pessoas) {
-//        this.pessoas = pessoas;
-//    }
+    public Set<Pessoa> getPessoas() {
+        return pessoas;
+    }
+
+    public void setPessoas(Set<Pessoa> pessoas) {
+        this.pessoas = pessoas;
+    }
 
     public Long getId() {
         return id;
@@ -113,7 +122,7 @@ public class Perfil implements Serializable {
                 ", descricao='" + descricao + '\'' +
                 ", dataHoraInclusao=" + dataHoraInclusao +
                 ", dataHoraAlteracao=" + dataHoraAlteracao +
-//                ", pessoas=" + pessoas +
+                ", pessoas=" + pessoas +
                 '}';
     }
 }

@@ -27,7 +27,6 @@ public class EnderecoResource {
 	@POST
 	@Transactional
 	public Response inserirEndereco(@Valid Endereco endereco) {
-		System.out.println(endereco);
 		return Response.ok(enderecoServico.salvar(endereco)).build();
 	}
 
