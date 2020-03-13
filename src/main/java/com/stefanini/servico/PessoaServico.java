@@ -2,6 +2,7 @@ package com.stefanini.servico;
 
 import com.stefanini.dao.PessoaDao;
 import com.stefanini.model.Pessoa;
+import com.stefanini.servico.exceptions.EmailAlreadyUsedException;
 import com.stefanini.util.IGenericService;
 
 import javax.ejb.Stateless;
@@ -11,6 +12,7 @@ import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 import javax.inject.Inject;
 import javax.validation.Valid;
+import javax.ws.rs.BadRequestException;
 
 import java.io.Serializable;
 import java.util.List;
@@ -39,6 +41,13 @@ public class PessoaServico implements Serializable {
 	 */
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public Pessoa salvar(@Valid Pessoa pessoa) {
+
+		Optional<List<Pessoa>> pessoas = dao.getList();
+		for (Pessoa p: pessoas.get()) {
+			if(p.getEmail().equals(pessoa.getEmail())) {
+				throw new EmailAlreadyUsedException();
+			}
+		}
 		return dao.salvar(pessoa);
 	}
 
