@@ -13,6 +13,7 @@ public class Endereco implements Serializable {
      * Serializacao da Classe
      */
     private static final long serialVersionUID = 1L;
+
     /**
      * ID da Tabela
      */
@@ -21,21 +22,39 @@ public class Endereco implements Serializable {
     @Column(name = "CO_SEQ_ENDERECO")
     private Long id;
 
+    /**
+     * Descrição do CEP
+     */
     @Column(name = "DS_CEP")
     private String cep;
 
+    /**
+     * UF
+     */
     @Column(name = "CO_UF")
     private String uf;
 
+    /**
+     * Descrição da cidade
+     */
     @Column(name = "DS_CIDADE")
     private String localidade;
 
+    /**
+     * Descrição do bairro
+     */
     @Column(name = "DS_BAIRRO")
     private String bairro;
 
+    /**
+     * Descrição do complemento
+     */
     @Column(name = "DS_COMPLEMENTO")
     private String complemento;
 
+    /**
+     * Descrição do logradouro
+     */
     @Column(name = "DS_LOGRADOURO")
     private String logradouro;
 

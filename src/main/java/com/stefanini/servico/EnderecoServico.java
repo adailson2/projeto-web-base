@@ -20,26 +20,41 @@ public class EnderecoServico implements IGenericService<Endereco, Long> {
 	@Inject
 	private EnderecoDao dao;
 
+	/**
+	 * Salvar os dados de um Endereço
+	 */
 	@Override
 	public Endereco salvar(@Valid Endereco entity) {
 		return dao.salvar(entity);
 	}
 
+	/**
+	 * Atualizar os dados de um Endereço
+	 */
 	@Override
 	public Endereco atualizar(@Valid Endereco entity) {
 		return dao.atualizar(entity);
 	}
 
+	/**
+	 * Remover os dados de um Endereço
+	 */
 	@Override
 	public void remover(Long id) {
 		dao.remover(id);
 	}
 
+	/**
+	 * Buscar uma lista de Endereços
+	 */
 	@Override
 	public Optional<List<Endereco>> getList() {
 		return dao.getList();
 	}
 
+	/**
+	 * Buscar um Endereço por ID
+	 */
 	@Override
 	public Optional<Endereco> encontrar(Long id) {
 		return dao.encontrar(id);

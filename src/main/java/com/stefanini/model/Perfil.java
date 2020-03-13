@@ -15,34 +15,44 @@ import static com.fasterxml.jackson.annotation.JsonFormat.Shape.STRING;
 @Entity
 @Table(name = "TB_PERFIL")
 public class Perfil implements Serializable {
+
     /**
-     *
+     * Serializacao da Classe
+     */
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * ID da Tabela
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "co_seq_perfil")
     private Long id;
+
     /**
-     *
+     * Nome do perfil
      */
     @NotNull
     @Column(name = "no_perfil")
     private String nome;
+
     /**
-     *
+     * Descrição do perfil
      */
     @NotNull
     @Column(name = "ds_perfil")
     private String descricao;
+
     /**
-     *
+     * Data e hora da inclusão do perfil
      */
     @Column(name = "dt_hora_inclusao")
     @NotNull
     @JsonFormat(shape = STRING, pattern = "yyyy-MM-dd HH:mm:ss.SS")
     private LocalDateTime dataHoraInclusao;
+
     /**
-     *
+     * Data e hora da alteração do perfil
      */
     @Column(name = "dt_hora_alteracao")
     @JsonFormat (shape = STRING, pattern = "yyyy-MM-dd HH:mm:ss.SS")

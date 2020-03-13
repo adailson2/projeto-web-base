@@ -7,14 +7,28 @@ import java.io.Serializable;
 @Table(name = "TB_PESSOA_PERFIL")
 public class PessoaPerfil implements Serializable {
 
+    /**
+     * Serializacao da Classe
+     */
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * ID da Tabela
+     */
     @Id
     @Column(name = "co_seq_pessoal_perfil")
     private Long id;
 
+    /**
+     * Relacionamento de perfil
+     */
     @ManyToOne
     @JoinColumn(name = "co_seq_perfil", referencedColumnName = "co_seq_perfil", nullable = false)
     private Perfil perfil;
 
+    /**
+     * Relacionamento de pessoa
+     */
     @ManyToOne
     @JoinColumn(name = "co_seq_pessoa", referencedColumnName = "co_seq_pessoa", nullable = false)
     private Pessoa pessoa;

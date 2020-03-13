@@ -29,9 +29,10 @@ import java.util.Optional;
 public class PessoaServico implements Serializable {
 
 	/**
-	 * 
+	 * Serializacao da Classe
 	 */
 	private static final long serialVersionUID = 1L;
+
 	@Inject
 	private PessoaDao dao;
 

@@ -39,11 +39,11 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 })
 public class Pessoa implements Serializable{
 
-	
 	/**
 	 * Serializacao da Classe
 	 */
 	private static final long serialVersionUID = 1L;
+
 	/**
 	 * ID da Tabela
 	 */
@@ -51,6 +51,7 @@ public class Pessoa implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "CO_SEQ_PESSOA")
 	private Long id;
+
 	/**
 	 * Nome da pessoa
 	 */
@@ -64,12 +65,14 @@ public class Pessoa implements Serializable{
 	@NotNull
 	@Column(name = "DS_EMAIL")
 	private String email;
+
 	/**
 	 * Data de Nascimento 
 	 */
 	@NotNull
 	@Column(name = "DT_NASCIMENTO")
-	private LocalDate dataNascimento; 
+	private LocalDate dataNascimento;
+
 	/**
 	 * Situacao da Pessoa
 	 */

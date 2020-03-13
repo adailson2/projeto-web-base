@@ -23,14 +23,14 @@ import java.util.Optional;
 public class PessoaPerfilServico implements Serializable {
 
 	/**
-	 * 
+	 * Serializacao da Classe
 	 */
 	private static final long serialVersionUID = 1L;
 	@Inject
 	private PessoaPerfilDao dao;
 
 	/**
-	 * Salvar os dados de uma PessoaPerfil
+	 * Vincular Pessoa e Perfil
 	 */
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public PessoaPerfil salvar(@Valid PessoaPerfil pessoaPerfil) {
@@ -38,7 +38,7 @@ public class PessoaPerfilServico implements Serializable {
 	}
 
 	/**
-	 * Atualizar o dados de uma pessoaPerfil
+	 * Alterar vínculo entre Pessoa e Perfil
 	 */
 //	@Override
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
@@ -47,7 +47,7 @@ public class PessoaPerfilServico implements Serializable {
 	}
 
 	/**
-	 * Remover uma pessoaPerfil pelo id
+	 * Remover vínculo entre Pessoa e Perfil
 	 */
 //	@Override
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
@@ -56,7 +56,7 @@ public class PessoaPerfilServico implements Serializable {
 	}
 
 	/**
-	 * Buscar uma lista de PessoaPerfil
+	 * Buscar a lista de relação entre os registros vinculados 
 	 */
 //	@Override
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
