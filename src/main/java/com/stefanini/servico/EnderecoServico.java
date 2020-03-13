@@ -1,12 +1,15 @@
 package com.stefanini.servico;
 
 import com.stefanini.dao.EnderecoDao;
+import com.stefanini.dao.PessoaDao;
 import com.stefanini.model.Endereco;
+import com.stefanini.model.Pessoa;
 import com.stefanini.util.IGenericService;
 
 import javax.ejb.*;
 import javax.inject.Inject;
 import javax.validation.Valid;
+import javax.ws.rs.BadRequestException;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
@@ -29,12 +32,32 @@ public class EnderecoServico implements Serializable {
 	@Inject
 	private EnderecoDao dao;
 
+	@Inject
+	private PessoaDao pessoaDao;
+
 	/**
 	 * Salvar os dados de um Endereço
 	 */
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public Endereco salvar(@Valid Endereco entity) {
-		return dao.salvar(entity);
+		List<Pessoa> pessoas = pessoaDao.getList().get();
+		Endereco endereco = null;
+
+		if(entity.getIdPessoa() == null){
+			throw new BadRequestException("Não é possível cadastrar endereço sem pessoa!");
+		}
+
+		for (Pessoa pessoa: pessoas) {
+			if(pessoa.getId() == entity.getIdPessoa()){
+				endereco = dao.salvar(entity);
+			}
+		}
+
+		if(endereco == null){
+			throw new BadRequestException("Não foi possível encontrar a pessoa de ID: " + entity.getIdPessoa());
+		}
+
+		return endereco;
 	}
 
 	/**
