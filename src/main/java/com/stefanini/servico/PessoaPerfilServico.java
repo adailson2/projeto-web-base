@@ -24,6 +24,7 @@ public class PessoaPerfilServico implements Serializable {
 	 * Serializacao da Classe
 	 */
 	private static final long serialVersionUID = 1L;
+
 	@Inject
 	private PessoaPerfilDao dao;
 

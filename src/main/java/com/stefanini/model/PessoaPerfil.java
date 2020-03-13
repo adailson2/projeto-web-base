@@ -1,6 +1,7 @@
 package com.stefanini.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Entity
@@ -16,28 +17,29 @@ public class PessoaPerfil implements Serializable {
      * ID da Tabela
      */
     @Id
-    @Column(name = "co_seq_pessoal_perfil")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "CO_SEQ_PESSOA_PERFIL")
     private Long id;
 
     /**
      * Relacionamento de perfil
      */
     @ManyToOne
-    @JoinColumn(name = "co_seq_perfil", referencedColumnName = "co_seq_perfil", nullable = false)
+    @JoinColumn(name = "CO_SEQ_PERFIL", referencedColumnName = "CO_SEQ_PERFIL", nullable = false)
     private Perfil perfil;
 
     /**
      * Relacionamento de pessoa
      */
     @ManyToOne
-    @JoinColumn(name = "co_seq_pessoa", referencedColumnName = "co_seq_pessoa", nullable = false)
+    @JoinColumn(name = "CO_SEQ_PESSOA", referencedColumnName = "CO_SEQ_PESSOA", nullable = false)
     private Pessoa pessoa;
 
     public PessoaPerfil() {
 		// TODO Auto-generated constructor stub
 	}
 
-    public PessoaPerfil(Perfil perfil, Pessoa pessoa) {
+    public PessoaPerfil(@NotNull Perfil perfil, @NotNull Pessoa pessoa) {
         this.perfil = perfil;
         this.pessoa = pessoa;
     }

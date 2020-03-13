@@ -26,27 +26,27 @@ public class Perfil implements Serializable {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "co_seq_perfil")
+    @Column(name = "CO_SEQ_PERFIL")
     private Long id;
 
     /**
      * Nome do perfil
      */
     @NotNull
-    @Column(name = "no_perfil")
+    @Column(name = "NO_PERFIL")
     private String nome;
 
     /**
      * Descrição do perfil
      */
     @NotNull
-    @Column(name = "ds_perfil")
+    @Column(name = "DS_PERFIL")
     private String descricao;
 
     /**
      * Data e hora da inclusão do perfil
      */
-    @Column(name = "dt_hora_inclusao")
+    @Column(name = "DT_HORA_INCLUSAO")
     @NotNull
     @JsonFormat(shape = STRING, pattern = "yyyy-MM-dd HH:mm:ss.SS")
     private LocalDateTime dataHoraInclusao;
@@ -54,7 +54,7 @@ public class Perfil implements Serializable {
     /**
      * Data e hora da alteração do perfil
      */
-    @Column(name = "dt_hora_alteracao")
+    @Column(name = "DT_HORA_ALTERACAO")
     @JsonFormat (shape = STRING, pattern = "yyyy-MM-dd HH:mm:ss.SS")
     private LocalDateTime dataHoraAlteracao;
 
