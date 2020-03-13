@@ -25,10 +25,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-/**
- * @author joaopedromilhome
- *
- */
 @Entity
 @Table(name = "TB_PESSOA")
 @NamedQueries(value = {

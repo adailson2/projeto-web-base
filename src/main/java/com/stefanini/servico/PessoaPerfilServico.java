@@ -13,8 +13,6 @@ import java.util.Optional;
 /**
  * 
  * Classe de servico, as regras de negocio devem estar nessa classe
- * 
- * @author joaopedromilhome
  *
  */
 @Stateless
@@ -40,7 +38,6 @@ public class PessoaPerfilServico implements Serializable {
 	/**
 	 * Alterar vínculo entre Pessoa e Perfil
 	 */
-//	@Override
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public PessoaPerfil atualizar(@Valid PessoaPerfil entity) {
 		return dao.atualizar(entity);
@@ -49,16 +46,14 @@ public class PessoaPerfilServico implements Serializable {
 	/**
 	 * Remover vínculo entre Pessoa e Perfil
 	 */
-//	@Override
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public void remover(@Valid Long id) {
 		dao.remover(id);
 	}
 
 	/**
-	 * Buscar a lista de relação entre os registros vinculados 
+	 * Buscar a lista de relação entre os registros vinculados
 	 */
-//	@Override
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public Optional<List<PessoaPerfil>> getList() {
 		return dao.getList();
@@ -67,7 +62,6 @@ public class PessoaPerfilServico implements Serializable {
 	/**
 	 * Buscar uma PessoaPerfil pelo ID
 	 */
-//	@Override
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public Optional<PessoaPerfil> encontrar(Long id) {
 		return dao.encontrar(id);

@@ -1,7 +1,6 @@
 package com.stefanini.resource;
 
 import com.stefanini.model.Endereco;
-import com.stefanini.model.Pessoa;
 import com.stefanini.servico.EnderecoServico;
 
 import javax.inject.Inject;
@@ -35,7 +34,6 @@ public class EnderecoResource {
 	public Response alterarEndereco(@Valid Endereco endereco) {return Response.ok(enderecoServico.atualizar(endereco)).build();}
 
 	@DELETE
-	@Transactional
 	@Path("{id}")
 	public void deletarEndereco(@PathParam("id") Long id) { enderecoServico.remover(id) ;}
 

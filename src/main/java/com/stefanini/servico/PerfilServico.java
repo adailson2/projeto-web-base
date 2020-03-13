@@ -12,7 +12,6 @@ import java.util.Optional;
 /**
  * 
  * Classe de servico, as regras de negocio devem estar nessa classe
- * @author joaopedromilhome
  *
  */
 public class PerfilServico implements IGenericService<Perfil, Long> {
