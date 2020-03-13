@@ -1,11 +1,14 @@
 package com.stefanini.servico;
 
 import com.stefanini.dao.PessoaPerfilDao;
+import com.stefanini.model.Perfil;
 import com.stefanini.model.PessoaPerfil;
+import com.stefanini.servico.exceptions.ObjectNotFoundException;
 
 import javax.ejb.*;
 import javax.inject.Inject;
 import javax.validation.Valid;
+import javax.ws.rs.BadRequestException;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
@@ -49,7 +52,12 @@ public class PessoaPerfilServico implements Serializable {
 	 */
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public void remover(@Valid Long id) {
-		dao.remover(id);
+		Optional<PessoaPerfil> pessoaPerfil = dao.encontrar(id);
+		if(pessoaPerfil.isPresent()){
+			dao.remover(id);
+		} else {
+			throw new BadRequestException("Vínculo não encontrado!");
+		}
 	}
 
 	/**
@@ -65,7 +73,13 @@ public class PessoaPerfilServico implements Serializable {
 	 */
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public Optional<PessoaPerfil> encontrar(Long id) {
-		return dao.encontrar(id);
+		Optional<PessoaPerfil> pessoaPerfil = dao.encontrar(id);
+
+		if(!pessoaPerfil.isPresent()){
+			throw new ObjectNotFoundException("Objeto não encontrado! Id: " + id
+					+ ", Tipo: " + PessoaPerfil.class.getName());
+		}
+		return pessoaPerfil;
 	}
 
 }

@@ -1,8 +1,11 @@
 package com.stefanini.servico;
 
 import com.stefanini.dao.PessoaDao;
+import com.stefanini.model.Endereco;
 import com.stefanini.model.Pessoa;
+import com.stefanini.model.PessoaPerfil;
 import com.stefanini.servico.exceptions.EmailAlreadyUsedException;
+import com.stefanini.servico.exceptions.ObjectNotFoundException;
 import com.stefanini.util.IGenericService;
 
 import javax.ejb.Stateless;
@@ -41,7 +44,6 @@ public class PessoaServico implements Serializable {
 	 */
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public Pessoa salvar(@Valid Pessoa pessoa) {
-
 		Optional<List<Pessoa>> pessoas = dao.getList();
 		for (Pessoa p: pessoas.get()) {
 			if(p.getEmail().equals(pessoa.getEmail())) {
@@ -55,8 +57,14 @@ public class PessoaServico implements Serializable {
 	 * Atualizar o dados de uma pessoa
 	 */
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-	public Pessoa atualizar(@Valid Pessoa entity) {
-		return dao.atualizar(entity);
+	public Pessoa atualizar(@Valid Pessoa pessoa) {
+		Optional<List<Pessoa>> pessoas = dao.getList();
+		for (Pessoa p: pessoas.get()) {
+			if(p.getEmail().equals(pessoa.getEmail())) {
+				throw new EmailAlreadyUsedException();
+			}
+		}
+		return dao.atualizar(pessoa);
 	}
 
 	/**
@@ -64,7 +72,12 @@ public class PessoaServico implements Serializable {
 	 */
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public void remover(@Valid Long id) {
-		dao.remover(id);
+		Optional<Pessoa> pessoa = dao.encontrar(id);
+		if(pessoa.isPresent()){
+			dao.remover(id);
+		} else {
+			throw new BadRequestException("Pessoa de ID: " + id + " não encontrada!");
+		}
 	}
 
 	/**
@@ -80,7 +93,13 @@ public class PessoaServico implements Serializable {
 	 */
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public Optional<Pessoa> encontrar(Long id) {
-		return dao.encontrar(id);
+		Optional<Pessoa> pessoa = dao.encontrar(id);
+
+		if(!pessoa.isPresent()){
+			throw new ObjectNotFoundException("Objeto não encontrado! Id: " + id
+					+ ", Tipo: " + PessoaPerfil.class.getName());
+		}
+		return pessoa;
 	}
 
 }
