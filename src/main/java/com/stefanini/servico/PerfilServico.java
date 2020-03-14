@@ -4,6 +4,7 @@ import com.stefanini.dao.PerfilDao;
 import com.stefanini.model.Endereco;
 import com.stefanini.model.Perfil;
 import com.stefanini.model.Pessoa;
+import com.stefanini.model.PessoaPerfil;
 import com.stefanini.servico.exceptions.ObjectNotFoundException;
 import com.stefanini.util.IGenericService;
 
@@ -45,6 +46,13 @@ public class PerfilServico implements Serializable {
 	 */
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public Perfil atualizar(@Valid Perfil entity) {
+		Optional<Perfil> p = dao.encontrar(entity.getId());
+
+		if(!p.isPresent()){
+			throw new ObjectNotFoundException("Objeto não encontrado! Id: " + entity.getId()
+					+ ", Tipo: " + Perfil.class.getName());
+		}
+
 		return dao.atualizar(entity);
 	}
 
@@ -57,7 +65,8 @@ public class PerfilServico implements Serializable {
 		if(perfil.isPresent()){
 			dao.remover(id);
 		} else {
-			throw new BadRequestException("Perfil de ID: " + id + " não encontrado!");
+			throw new ObjectNotFoundException("Objeto não encontrado! Id: " + id
+					+ ", Tipo: " + Perfil.class.getName());
 		}
 	}
 
@@ -75,11 +84,11 @@ public class PerfilServico implements Serializable {
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public Optional<Perfil> encontrar(Long id) {
 		Optional<Perfil> perfil = dao.encontrar(id);
-
 		if(!perfil.isPresent()){
 			throw new ObjectNotFoundException("Objeto não encontrado! Id: " + id
 					+ ", Tipo: " + Perfil.class.getName());
 		}
+
 		return perfil;
 	}
 }

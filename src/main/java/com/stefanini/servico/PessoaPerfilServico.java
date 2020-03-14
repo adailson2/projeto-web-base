@@ -2,6 +2,7 @@ package com.stefanini.servico;
 
 import com.stefanini.dao.PessoaPerfilDao;
 import com.stefanini.model.Perfil;
+import com.stefanini.model.Pessoa;
 import com.stefanini.model.PessoaPerfil;
 import com.stefanini.servico.exceptions.ObjectNotFoundException;
 
@@ -44,6 +45,13 @@ public class PessoaPerfilServico implements Serializable {
 	 */
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public PessoaPerfil atualizar(@Valid PessoaPerfil entity) {
+		Optional<PessoaPerfil> pp = dao.encontrar(entity.getId());
+
+		if(!pp.isPresent()){
+			throw new ObjectNotFoundException("Objeto não encontrado! Id: " + entity.getId()
+					+ ", Tipo: " + PessoaPerfil.class.getName());
+		}
+
 		return dao.atualizar(entity);
 	}
 

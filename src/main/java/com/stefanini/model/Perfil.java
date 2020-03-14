@@ -68,7 +68,7 @@ public class Perfil implements Serializable {
     public Perfil() {
     }
 
-    public Perfil(@NotNull String nome, @NotNull String descricao, @NotNull LocalDateTime dataHoraInclusao, LocalDateTime dataHoraAlteracao, Set<Pessoa> pessoas) {
+    public Perfil(@NotNull String nome, @NotNull String descricao, @NotNull LocalDateTime dataHoraInclusao, @NotNull LocalDateTime dataHoraAlteracao, @NotNull Set<Pessoa> pessoas) {
         this.nome = nome;
         this.descricao = descricao;
         this.dataHoraInclusao = dataHoraInclusao;

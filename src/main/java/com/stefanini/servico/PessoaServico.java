@@ -58,9 +58,17 @@ public class PessoaServico implements Serializable {
 	 */
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public Pessoa atualizar(@Valid Pessoa pessoa) {
+		// Verifica se objeto existe no banco
+		Optional<Pessoa> p = dao.encontrar(pessoa.getId());
+		if(!p.isPresent()){
+			throw new ObjectNotFoundException("Objeto não encontrado! Id: " + pessoa.getId()
+					+ ", Tipo: " + Pessoa.class.getName());
+		}
+
+		// Verifica se o email já existe
 		Optional<List<Pessoa>> pessoas = dao.getList();
-		for (Pessoa p: pessoas.get()) {
-			if(p.getEmail().equals(pessoa.getEmail())) {
+		for (Pessoa pes: pessoas.get()) {
+			if(pes.getEmail().equals(pessoa.getEmail())) {
 				throw new EmailAlreadyUsedException();
 			}
 		}
@@ -76,7 +84,8 @@ public class PessoaServico implements Serializable {
 		if(pessoa.isPresent()){
 			dao.remover(id);
 		} else {
-			throw new BadRequestException("Pessoa de ID: " + id + " não encontrada!");
+			throw new ObjectNotFoundException("Objeto não encontrado! Id: " + id
+					+ ", Tipo: " + PessoaPerfil.class.getName());
 		}
 	}
 
